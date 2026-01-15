@@ -15,10 +15,10 @@
 #ifndef _PROS_MAIN_H_
 #define _PROS_MAIN_H_
 
-#define LeftMotors {}
-#define RightMotors {}
-#define IntakeMotors {}
-#define OuttakeMotor 1
+#define LeftMotors {-8, -7, -14}
+#define RightMotors {1, 2, 3}
+#define IntakeMotors {12,-13}
+#define OuttakeMotor 11
 
 /**
  * If defined, some commonly used enums will have preprocessor macros which give
@@ -45,6 +45,7 @@
  * You should add more #includes here
  */
 //#include "okapi/api.hpp"
+#include "lemlib/api.hpp" // IWYU pragma: keep
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -82,14 +83,16 @@ void opcontrol(void);
 //#include <iostream>
 #endif
 
-pros::MotorGroup left(LeftMotors);
-pros::MotorGroup right(RightMotors);
+pros::MotorGroup left(LeftMotors, pros::MotorGearset::blue);
+pros::MotorGroup right(RightMotors, pros::MotorGearset::blue);
 
 pros::MotorGroup intake(IntakeMotors);
 pros::Motor outtake(OuttakeMotor);
 
 pros::adi::Pneumatics lift('D', false);
+bool bLift = false;
 pros::adi::Pneumatics descore('C', false);
+bool bDescore = false;
 
 //Chassis
 

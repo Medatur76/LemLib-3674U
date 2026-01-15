@@ -1,4 +1,11 @@
+#ifndef __MAIN_H
 #include "main.h"
+#define __MAIN_H
+#endif
+#ifndef __AUTON_H
+#include "auton.h"
+#define __AUTON_H
+#endif
 
 /**
  * A callback function for LLEMU's center button.
@@ -58,7 +65,10 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	//Put some button to select auton
+
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -86,9 +96,8 @@ void opcontrol() {
 		intake.move((master.get_digital(DIGITAL_R2)-master.get_digital(DIGITAL_R1)) * 127);
     	outtake.move((master.get_digital(DIGITAL_L1)-master.get_digital(DIGITAL_L2)) * 127);
 
-		lift.set_value(master.get_digital(DIGITAL_DOWN));
-		
-		descore.set_value(master.get_digital(DIGITAL_RIGHT));
+		if (master.get_digital(DIGITAL_DOWN) != bLift) lift.set_value(bLift == !bLift);
+		if (master.get_digital(DIGITAL_RIGHT) != bDescore) descore.set_value(bDescore == !bDescore);
 
 		pros::delay(20);                               // Run for 20 ms then update
 	}

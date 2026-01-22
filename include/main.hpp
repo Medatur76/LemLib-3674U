@@ -81,18 +81,14 @@ void opcontrol(void);
  * You can add C++-only headers here
  */
 //#include <iostream>
+#include <string>
 #endif
 
-pros::MotorGroup left(LeftMotors, pros::MotorGearset::blue);
-pros::MotorGroup right(RightMotors, pros::MotorGearset::blue);
+inline pros::MotorGroup left(LeftMotors, pros::MotorGearset::blue);
+inline pros::MotorGroup right(RightMotors, pros::MotorGearset::blue);
 
-pros::MotorGroup intake(IntakeMotors);
-pros::Motor outtake(OuttakeMotor);
-
-pros::adi::Pneumatics lift('D', false);
-bool bLift = false;
-pros::adi::Pneumatics descore('C', false);
-bool bDescore = false;
+inline pros::MotorGroup intake(IntakeMotors);
+inline pros::Motor outtake(OuttakeMotor);
 
 //Chassis
 

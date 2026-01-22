@@ -1,10 +1,10 @@
 #ifndef __MAIN_H
-#include "main.h"
 #define __MAIN_H
+#include "main.hpp"
 #endif
 #ifndef __AUTON_H
-#include "auton.h"
 #define __AUTON_H
+#include "auton.hpp"
 #endif
 
 int FACING = 1;

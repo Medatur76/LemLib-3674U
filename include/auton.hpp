@@ -1,10 +1,10 @@
 #ifndef __MAIN_H
-#include "main.h"
 #define __MAIN_H
+#include "main.hpp"
 #endif
 
 // drivetrain settings
-lemlib::Drivetrain drivetrain(&left, // left motor group
+inline lemlib::Drivetrain drivetrain(&left, // left motor group
                               &right, // right motor group
                               16, // 14 inch track width
                               lemlib::Omniwheel::NEW_325, // using new 4" omnis
@@ -13,18 +13,18 @@ lemlib::Drivetrain drivetrain(&left, // left motor group
 );
 
 // create an imu on port 10
-pros::Imu imu(10);
+inline pros::Imu imu(10);
 
 // horizontal tracking wheel encoder
-pros::Rotation horizontal_encoder(20);
+inline pros::Rotation horizontal_encoder(20);
 // vertical tracking wheel encoder
-pros::adi::Encoder vertical_encoder('C', 'D', true);
+inline pros::adi::Encoder vertical_encoder('C', 'D', true);
 // horizontal tracking wheel
-lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -5.75);
+inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, lemlib::Omniwheel::NEW_275, -5.75);
 // vertical tracking wheel
-lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, lemlib::Omniwheel::NEW_275, -2.5);
+inline lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, lemlib::Omniwheel::NEW_275, -2.5);
 
-lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel 1, set to null
+inline lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel 1, set to null
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
                             &horizontal_tracking_wheel, // horizontal tracking wheel 1
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
@@ -32,7 +32,7 @@ lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel
 );
 
 // lateral PID controller
-lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
+inline lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               3, // derivative gain (kD)
                                               3, // anti windup
@@ -44,7 +44,7 @@ lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
+inline lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               10, // derivative gain (kD)
                                               3, // anti windup
@@ -56,8 +56,11 @@ lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
 );
 
 // create the chassis
-lemlib::Chassis chassis(drivetrain, // drivetrain settings
+inline lemlib::Chassis chassis(drivetrain, // drivetrain settings
                         lateral_controller, // lateral PID settings
                         angular_controller, // angular PID settings
                         sensors // odometry sensors
 );
+
+extern void BLRR();
+extern void BRRL();

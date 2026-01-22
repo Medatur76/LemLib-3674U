@@ -1,6 +1,7 @@
 #include "liblvgl/llemu.hpp"
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
+#include <stdio.h>
 #include <string>
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -10,6 +11,11 @@
 #define __AUTON_H
 #include "auton.hpp"
 #endif
+
+pros::adi::Pneumatics lift('D', false);
+bool liftCD = false;
+pros::adi::Pneumatics descore('C', false);
+bool descoreCD = false;
 
 /**
  * A callback function for LLEMU's center button.
@@ -89,17 +95,11 @@ void autonomous() {
  */
 void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	bool matchloadjustpressed = false;
+	/*bool matchloadjustpressed = false;
     bool wingjustpressed = false;
     bool singleactingwing = false;
-    bool singleactingmatchload = false;
-
-	lift.extend();
-
-	pros::delay(2000);
-
-	lift.retract();
-
+    bool singleactingmatchload = false;*/
+	
 	while (true) {
 		// Arcade control scheme
 		int dir = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
@@ -110,8 +110,18 @@ void opcontrol() {
 		intake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)-master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) * 127);
     	outtake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)-master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) * 127);
 
-		//if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) lift.toggle();
-		//if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) descore.toggle();
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+			if (liftCD) {
+				liftCD = false;
+				lift.toggle();
+			}
+		} else liftCD = true;
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+			if (descoreCD) {
+				descoreCD = false;
+				descore.toggle();
+			}
+		} else descoreCD = true;
 		/*bool RightPressed = master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT);
         if (RightPressed && !matchloadjustpressed) {
 			pros::lcd::set_text(2, "RIGHT PRESSED");

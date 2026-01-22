@@ -4,8 +4,8 @@
 #endif
 
 // drivetrain settings
-inline lemlib::Drivetrain drivetrain(&left, // left motor group
-                              &right, // right motor group
+inline lemlib::Drivetrain drivetrain(&leftMG, // left motor group
+                              &rightMG, // right motor group
                               16, // 14 inch track width
                               lemlib::Omniwheel::NEW_325, // using new 4" omnis
                               450, // drivetrain rpm is 360
@@ -62,5 +62,14 @@ inline lemlib::Chassis chassis(drivetrain, // drivetrain settings
                         sensors // odometry sensors
 );
 
-extern void BLRR();
-extern void BRRL();
+class wingrush {
+    public:
+        const static void left();
+        const static void right();
+};
+
+class midgoal {
+    public:
+        const static void left();
+        const static void right();
+};

@@ -84,8 +84,8 @@ void opcontrol(void);
 #include <string>
 #endif
 
-inline pros::MotorGroup left(LeftMotors, pros::MotorGearset::blue);
-inline pros::MotorGroup right(RightMotors, pros::MotorGearset::blue);
+inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue);
+inline pros::MotorGroup rightMG(RightMotors, pros::MotorGearset::blue);
 
 inline pros::MotorGroup intake(IntakeMotors);
 inline pros::Motor outtake(OuttakeMotor);

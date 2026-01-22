@@ -1,7 +1,7 @@
 #include "liblvgl/llemu.hpp"
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
-#include <stdio.h>
+#include <algorithm>
 #include <string>
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -16,6 +16,19 @@ pros::adi::Pneumatics lift('D', false);
 bool liftCD = false;
 pros::adi::Pneumatics descore('C', false);
 bool descoreCD = false;
+
+int selected_auton = 0;
+std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT"};
+using auton_function = const void(*)(void);
+auton_function autonFuncs[] = {wingrush::left, wingrush::right, midgoal::left, midgoal::right};
+
+int max(int a, int b) {
+	return a > b ? a : b;
+}
+
+int min(int a, int b) {
+	return a < b ? a : b;
+}
 
 /**
  * A callback function for LLEMU's center button.
@@ -33,6 +46,16 @@ void on_center_button() {
 	}
 }
 
+void on_left_button() {
+	pros::lcd::clear_line(2);
+	pros::lcd::set_text(2, autons[selected_auton = max(--selected_auton, 0)]);
+}
+
+void on_right_button() {
+	pros::lcd::clear_line(2);
+	pros::lcd::set_text(2, autons[selected_auton = min(++selected_auton, 3)]);
+}
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -41,9 +64,10 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+	pros::lcd::set_text(1, "Hello 3674U!");
 
-	pros::lcd::register_btn1_cb(on_center_button);
+	pros::lcd::register_btn0_cb(on_left_button);
+	pros::lcd::register_btn2_cb(on_right_button);
 }
 
 /**
@@ -62,7 +86,9 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() {
+	pros::lcd::set_text(2, autons[selected_auton]);
+}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -76,8 +102,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	//Put some button to select auton
-
+	autonFuncs[selected_auton]();
 }
 
 /**
@@ -95,17 +120,16 @@ void autonomous() {
  */
 void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	/*bool matchloadjustpressed = false;
-    bool wingjustpressed = false;
-    bool singleactingwing = false;
-    bool singleactingmatchload = false;*/
+
+	lift.retract();
+	descore.retract();
 	
 	while (true) {
 		// Arcade control scheme
 		int dir = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		left.move(dir + turn);                      // Sets left motor voltage
-		right.move(dir - turn);                     // Sets right motor voltage
+		leftMG.move(dir + turn);                      // Sets left motor voltage
+		rightMG.move(dir - turn);                     // Sets right motor voltage
 
 		intake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)-master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) * 127);
     	outtake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)-master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) * 127);

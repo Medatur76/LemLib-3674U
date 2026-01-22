@@ -1,10 +1,14 @@
+#include "liblvgl/llemu.hpp"
+#include "pros/misc.h"
+#include "pros/rtos.hpp"
+#include <string>
 #ifndef __MAIN_H
-#include "main.h"
 #define __MAIN_H
+#include "main.hpp"
 #endif
 #ifndef __AUTON_H
-#include "auton.h"
 #define __AUTON_H
+#include "auton.hpp"
 #endif
 
 /**
@@ -85,20 +89,46 @@ void autonomous() {
  */
 void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	bool matchloadjustpressed = false;
+    bool wingjustpressed = false;
+    bool singleactingwing = false;
+    bool singleactingmatchload = false;
+
+	lift.extend();
+
+	pros::delay(2000);
+
+	lift.retract();
 
 	while (true) {
 		// Arcade control scheme
-		int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		left.move(dir - turn);                      // Sets left motor voltage
-		right.move(dir + turn);                     // Sets right motor voltage
+		int dir = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
+		int turn = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
+		left.move(dir + turn);                      // Sets left motor voltage
+		right.move(dir - turn);                     // Sets right motor voltage
 
-		intake.move((master.get_digital(DIGITAL_R2)-master.get_digital(DIGITAL_R1)) * 127);
-    	outtake.move((master.get_digital(DIGITAL_L1)-master.get_digital(DIGITAL_L2)) * 127);
+		intake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)-master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) * 127);
+    	outtake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)-master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) * 127);
 
-		if (master.get_digital(DIGITAL_DOWN) != bLift) lift.set_value(bLift == !bLift);
-		if (master.get_digital(DIGITAL_RIGHT) != bDescore) descore.set_value(bDescore == !bDescore);
+		//if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) lift.toggle();
+		//if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) descore.toggle();
+		/*bool RightPressed = master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT);
+        if (RightPressed && !matchloadjustpressed) {
+			pros::lcd::set_text(2, "RIGHT PRESSED");
+            singleactingmatchload = !singleactingmatchload;
+            // since lemlib doesnt have built in edge detection, we use this so that the toggle only runs once per instance, we do the same with the wing
+            lift.set_value(singleactingmatchload);
+        }
+        matchloadjustpressed = RightPressed;
+
+        bool YPressed = master.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
+        if (YPressed && !wingjustpressed) {
+            singleactingwing = !singleactingwing;
+            descore.set_value(singleactingwing);
+        }
+        wingjustpressed = YPressed;*/
 
 		pros::delay(20);                               // Run for 20 ms then update
+
 	}
 }

@@ -1,16 +1,10 @@
+#include "main.hpp"
+#include "auton.hpp"
 #include "liblvgl/llemu.hpp"
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
 #include <algorithm>
 #include <string>
-#ifndef __MAIN_H
-#define __MAIN_H
-#include "main.hpp"
-#endif
-#ifndef __AUTON_H
-#define __AUTON_H
-#include "auton.hpp"
-#endif
 
 pros::adi::Pneumatics lift('D', false);
 bool liftCD = false;

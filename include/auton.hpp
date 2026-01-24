@@ -1,5 +1,5 @@
-#ifndef __MAIN_H
-#define __MAIN_H
+#ifndef __AUTON_H
+#define __AUTON_H
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "main.hpp"
 #include "pros/rotation.hpp"
@@ -10,7 +10,7 @@
 // drivetrain settings
 inline lemlib::Drivetrain drivetrain(&leftMG,                          // left motor group
                                      &rightMG,                         // right motor group
-                                     12,                               // 14 inch track width
+                                     12,                               // 12 inch track width
                                      lemlib::Omniwheel::NEW_325,       // using new 3.25" omnis
                                      450,                              // drivetrain rpm is 450
                                      2                                 // horizontal drift is 2
@@ -21,18 +21,18 @@ inline lemlib::Drivetrain drivetrain(&leftMG,                          // left m
 
 inline pros::Imu imu(9);
 
-// horizontal tracking wheel encoder (rotation sensor on port 20)
+// horizontal tracking wheel encoder (rotation sensor on port 15, reversed)
 inline pros::Rotation horizontal_encoder(-15);
 
-// vertical tracking wheel encoder (ADI encoder on ports C and D)
+// vertical tracking wheel encoder (rotation sensor on port 5)
 inline pros::Rotation vertical_encoder(5);
 
-// horizontal tracking wheel (2.75" omni, 5.75" to the left)
+// horizontal tracking wheel (2" omni, offset to the left)
 inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, 
                                                        lemlib::Omniwheel::NEW_2, 
                                                        -0.32);
 
-// vertical tracking wheel (2.75" omni, 2.5" backward)
+// vertical tracking wheel (2.75" omni, offset backward)
 inline lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, 
                                                      lemlib::Omniwheel::NEW_275, 
                                                      0.64);

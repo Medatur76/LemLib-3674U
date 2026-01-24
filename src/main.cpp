@@ -68,6 +68,10 @@ void initialize() {
 
 	pros::lcd::register_btn0_cb(on_left_button);
 	pros::lcd::register_btn2_cb(on_right_button);
+
+	// Calibrate the chassis IMU and sensors
+	chassis.calibrate();
+
 }
 
 /**

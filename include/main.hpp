@@ -84,14 +84,12 @@ void opcontrol(void);
 #include <string>
 #endif
 
+// Drivetrain motor groups
 inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue);
 inline pros::MotorGroup rightMG(RightMotors, pros::MotorGearset::blue);
 
+// Mechanism motors
 inline pros::MotorGroup intake(IntakeMotors);
 inline pros::Motor outtake(OuttakeMotor);
-
-//Chassis
-
-//Odom
 
 #endif  // _PROS_MAIN_H_

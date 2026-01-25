@@ -6,12 +6,8 @@
 #include <algorithm>
 #include <string>
 
-pros::adi::Pneumatics lift('D', false);
-bool liftCD = false;
-pros::adi::Pneumatics descore('C', false);
-bool descoreCD = false;
 
-int selected_auton = 0;
+int selected_auton = 1;
 std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT"};
 using auton_function = const void(*)(void);
 auton_function autonFuncs[] = {wingrush::left, wingrush::right, midgoal::left, midgoal::right};
@@ -75,6 +71,7 @@ void initialize() {
  */
 void disabled() {}
 
+
 /**
  * Runs after initialize(), and before autonomous when connected to the Field
  * Management System or the VEX Competition Switch. This is intended for
@@ -118,9 +115,6 @@ void autonomous() {
  */
 void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-
-	lift.retract();
-	descore.retract();
 	
 	while (true) {
 		// Arcade control scheme

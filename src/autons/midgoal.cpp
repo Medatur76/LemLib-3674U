@@ -8,6 +8,8 @@ const void midgoal::left() {
 }
 
 const void midgoal::right() {
-    leftMG.move(127);
-    rightMG.move(-127);
+    chassis.setPose(47.362, 13.922, 270);
+    intake.move(-127);
+    chassis.moveToPoint(14.379,25.104 ,5000);
+
 }

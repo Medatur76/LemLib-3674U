@@ -92,4 +92,10 @@ inline pros::MotorGroup rightMG(RightMotors, pros::MotorGearset::blue);
 inline pros::MotorGroup intake(IntakeMotors);
 inline pros::Motor outtake(OuttakeMotor);
 
+//Pneumatics
+inline pros::adi::Pneumatics lift('D', true);
+inline bool liftCD = false;
+inline pros::adi::Pneumatics descore('C', false);
+inline bool descoreCD = false;
+
 #endif  // _PROS_MAIN_H_

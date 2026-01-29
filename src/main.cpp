@@ -1,11 +1,7 @@
+#ifndef __MAIN_H
+#define __MAIN_H
 #include "main.hpp"
-#include "auton.hpp"
-#include "liblvgl/llemu.hpp"
-#include "pros/misc.h"
-#include "pros/rtos.hpp"
-#include <algorithm>
-#include <string>
-
+#endif
 
 int selected_auton = 1;
 std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT"};

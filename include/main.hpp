@@ -46,6 +46,12 @@
  */
 //#include "okapi/api.hpp"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "liblvgl/llemu.hpp"
+#include "pros/misc.h"
+#include "pros/rtos.hpp"
+
+#include "auton.hpp"
+#include "motions.hpp"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -80,8 +86,9 @@ void opcontrol(void);
 /**
  * You can add C++-only headers here
  */
-//#include <iostream>
+#include <algorithm>
 #include <string>
+#include <cmath>
 #endif
 
 // Drivetrain motor groups

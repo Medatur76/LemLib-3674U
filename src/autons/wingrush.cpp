@@ -1,6 +1,7 @@
+#ifndef __MAIN_H
+#define __MAIN_H
 #include "main.hpp"
-#include "auton.hpp"
-#include "motions.hpp"
+#endif
 
 const void wingrush::left() {
     leftMG.move(127);

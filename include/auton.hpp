@@ -1,10 +1,3 @@
-#ifndef __AUTON_H
-#define __AUTON_H
-#include "lemlib/chassis/trackingWheel.hpp"
-#include "main.hpp"
-#include "pros/rotation.hpp"
-#endif
-
 // ========== DRIVETRAIN SETUP ==========
 
 // drivetrain settings

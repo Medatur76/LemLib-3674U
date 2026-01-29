@@ -50,9 +50,6 @@
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
 
-#include "auton.hpp"
-#include "motions.hpp"
-
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
  * Motor, you can use the namespace with the following commented out line.
@@ -99,10 +96,18 @@ inline pros::MotorGroup rightMG(RightMotors, pros::MotorGearset::blue);
 inline pros::MotorGroup intake(IntakeMotors);
 inline pros::Motor outtake(OuttakeMotor);
 
-//Pneumatics
+// Pneumatics
+// This caused the error with the pneumatics not working lasttime as far as im concerned so this might have to be moved back to a cpp file 
 inline pros::adi::Pneumatics lift('D', true);
 inline bool liftCD = false;
 inline pros::adi::Pneumatics descore('C', false);
 inline bool descoreCD = false;
+
+/**
+ * Custom headers that rely on declared values above
+ */
+
+#include "auton.hpp"
+#include "motions.hpp"
 
 #endif  // _PROS_MAIN_H_

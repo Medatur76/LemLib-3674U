@@ -3,6 +3,11 @@
 #include "main.hpp"
 #endif
 
+/**
+ * Assumptions:
+ * 1. Lift and Descore are retracted/up
+ */
+
 const void midgoal::left() {
     leftMG.move(-127);
     rightMG.move(127);

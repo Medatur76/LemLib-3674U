@@ -16,22 +16,6 @@ int min(int a, int b) {
 	return a < b ? a : b;
 }
 
-/**
- * A callback function for LLEMU's center button.
- *
- * When this callback is fired, it will toggle line 2 of the LCD text between
- * "I was pressed!" and nothing.
- */
-void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
-}
-
 void on_left_button() {
 	pros::lcd::clear_line(2);
 	pros::lcd::set_text(2, autons[selected_auton = max(--selected_auton, 0)]);
@@ -57,7 +41,6 @@ void initialize() {
 
 	// Calibrate the chassis IMU and sensors
 	chassis.calibrate();
-
 }
 
 /**
@@ -134,23 +117,7 @@ void opcontrol() {
 				descore.toggle();
 			}
 		} else descoreCD = true;
-		/*bool RightPressed = master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT);
-        if (RightPressed && !matchloadjustpressed) {
-			pros::lcd::set_text(2, "RIGHT PRESSED");
-            singleactingmatchload = !singleactingmatchload;
-            // since lemlib doesnt have built in edge detection, we use this so that the toggle only runs once per instance, we do the same with the wing
-            lift.set_value(singleactingmatchload);
-        }
-        matchloadjustpressed = RightPressed;
-
-        bool YPressed = master.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
-        if (YPressed && !wingjustpressed) {
-            singleactingwing = !singleactingwing;
-            descore.set_value(singleactingwing);
-        }
-        wingjustpressed = YPressed;*/
 
 		pros::delay(20);                               // Run for 20 ms then update
-
 	}
 }

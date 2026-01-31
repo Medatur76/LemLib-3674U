@@ -15,7 +15,7 @@ const void wingrush::right() {
     chassis.moveToPoint(20.749, 24.397, 5000, {.earlyExitRange = 3});
     chassis.waitUntilDone();
     lift.extend();
-    chassis.swingToHeading(52, DriveSide::RIGHT,5000, {.maxSpeed = 127,.minSpeed = 30, .earlyExitRange =12});
+    chassis.turnToHeading(52, 5000, {.maxSpeed = 127,.minSpeed = 30, .earlyExitRange =12});
     chassis.moveToPose(59.649, 46.904, 90, 5000);
     chassis.waitUntilDone();
     pros::delay(500);

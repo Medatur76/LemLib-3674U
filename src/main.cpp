@@ -111,7 +111,7 @@ void opcontrol() {
 				lift.toggle();
 			}
 		} else liftCD = true;
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
 			if (descoreCD) {
 				descoreCD = false;
 				descore.toggle();

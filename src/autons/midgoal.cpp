@@ -3,10 +3,7 @@
 #include "main.hpp"
 #endif
 
-/**
- * Assumptions:
- * 1. Lift and Descore are retracted/up
- */
+PathReader reader(midgoal_right_test_txt);
 
 const void midgoal::left() {
     leftMG.move(-127);
@@ -14,8 +11,16 @@ const void midgoal::left() {
 }
 
 const void midgoal::right() {
-    chassis.setPose(47.362, 13.922, 270);
+    chassis.setPose(55.66, 13.306, 270);
+    lift.extend();
+    chassis.follow(reader["Start"], 10, 3000);
+    intake.move(127);
+    pros::delay(1000);
+    chassis.follow(reader["LongGoal"], 10, 1500);
+    outtake.move(127);
+    pros::delay(1500);
+    outtake.move(0);
+    intake.move(0);
+    chassis.follow(reader["MidGoal"], 10, 2000);
     intake.move(-127);
-    chassis.moveToPoint(14.379,25.104 ,5000);
-
 }

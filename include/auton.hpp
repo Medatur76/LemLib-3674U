@@ -1,3 +1,5 @@
+#include <vector>
+#include "lemlib/asset.hpp"
 // ========== DRIVETRAIN SETUP ==========
 
 // drivetrain settings
@@ -72,6 +74,16 @@ inline lemlib::Chassis chassis(drivetrain,       // drivetrain settings
                                angular_controller, // angular PID settings
                                sensors             // odometry sensors
 );
+
+class PathReader {
+    protected:
+        std::vector<std::string> paths;
+        std::vector<asset> assets;
+    public:
+        PathReader(const asset&);
+
+        asset& operator[](const char*);
+};
 
 class wingrush {
     public:

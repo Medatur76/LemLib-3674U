@@ -88,6 +88,8 @@ void opcontrol(void);
 #include <cmath>
 #endif
 
+ASSET(midgoal_right_test_txt);
+
 // Drivetrain motor groups
 inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue);
 inline pros::MotorGroup rightMG(RightMotors, pros::MotorGearset::blue);

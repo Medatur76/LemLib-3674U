@@ -1,5 +1,3 @@
-#include <vector>
-#include "lemlib/asset.hpp"
 // ========== DRIVETRAIN SETUP ==========
 
 // drivetrain settings

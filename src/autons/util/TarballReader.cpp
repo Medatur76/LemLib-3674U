@@ -1,7 +1,6 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 #include "main.hpp"
-#include <exception>
 #endif
 
 PathReader::PathReader(const asset& path) {
@@ -13,11 +12,6 @@ PathReader::PathReader(const asset& path) {
 
     while ((d_pos = tarball_str.find('\n', pos)) != std::string::npos) {
         std::string currentLine = tarball_str.substr(pos, d_pos - pos);
-
-        /*if (currentLine == "endData" && recordingPath) {
-            asset c = {path.buf + currentOffset, d_pos - currentOffset};
-            assets.push_back(c);
-        }*/
 
         if (currentLine.starts_with('#')) {
             if (recordingPath) {
@@ -31,6 +25,14 @@ PathReader::PathReader(const asset& path) {
         }
 
         pos = d_pos + 1;
+    }
+
+    if (recordingPath) {
+        std::string last_line = tarball_str.substr(pos);
+        std::size_t path_content_end = last_line.starts_with("#") ? pos : path.size;
+
+        // commit the path
+        assets.push_back({path.buf + s_pos, path_content_end - s_pos});
     }
 }
 

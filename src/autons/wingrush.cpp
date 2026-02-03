@@ -4,23 +4,33 @@
 #endif
 
 const void wingrush::left() {
-    leftMG.move(127);
-    rightMG.move(127);
+    PathReader reader = PathReader(wingrush_left_txt);
+    chassis.setPose(55.66, -13.306, 270);
+    lift.extend();
+    chassis.follow(reader["Start"], 10, 2000);
+    intake.move(127);
+    pros::delay(1000);
+    chassis.follow(reader["Score"], 10, 1000);
+    outtake.move(127);
+    pros::delay(1500);
+    outtake.move(0);
+    intake.move(0);
+    descore.retract();
+    chassis.follow(reader["Descore"], 10, 3000);
 }
 
 const void wingrush::right() {
-    chassis.setPose(47.362, 13.922, 270);
-    intake.move(127);
-    chassis.moveToPoint(30.092  ,17.177 ,5000, {.maxSpeed = 65,.minSpeed = 30, .earlyExitRange = 3});
-    chassis.moveToPoint(20.749, 24.397, 5000, {.earlyExitRange = 3});
-    chassis.waitUntilDone();
+    PathReader reader = PathReader(wingrush_right_txt);
+    chassis.setPose(55.66, 13.306, 270);
     lift.extend();
-    chassis.turnToHeading(52, 5000, {.maxSpeed = 127,.minSpeed = 30, .earlyExitRange =12});
-    chassis.moveToPose(59.649, 46.904, 90, 5000);
-    chassis.waitUntilDone();
-    pros::delay(500);
-    chassis.moveToPoint(31.054, 46.904, 5000, {.forwards = false});
-    chassis.waitUntilDone();
+    chassis.follow(reader["Start"], 10, 2000);
+    intake.move(127);
+    pros::delay(1000);
+    chassis.follow(reader["Score"], 10, 1000);
     outtake.move(127);
-    lift.retract();
+    pros::delay(1500);
+    outtake.move(0);
+    intake.move(0);
+    descore.retract();
+    chassis.follow(reader["Descore"], 10, 3000);
 }

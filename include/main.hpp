@@ -90,6 +90,8 @@ void opcontrol(void);
 
 ASSET(midgoal_right_txt);
 ASSET(midgoal_left_txt);
+ASSET(wingrush_right_txt);
+ASSET(wingrush_left_txt);
 
 // Drivetrain motor groups
 inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue);

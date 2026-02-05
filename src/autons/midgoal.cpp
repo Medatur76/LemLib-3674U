@@ -22,7 +22,7 @@ const void midgoal::left() {
 const void midgoal::right() {
     PathReader reader = PathReader(midgoal_right_txt);
     chassis.setPose(55.66, 13.306, 270);
-    lift.extend();
+    lift.retract();
     chassis.follow(reader["Start"], 10, 3000);
     intake.move(127);
     pros::delay(1000);

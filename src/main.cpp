@@ -3,7 +3,7 @@
 #include "main.hpp"
 #endif
 
-int selected_auton = 3;
+int selected_auton = 1;
 std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT"};
 using auton_function = const void(*)(void);
 auton_function autonFuncs[] = {wingrush::left, wingrush::right, midgoal::left, midgoal::right};

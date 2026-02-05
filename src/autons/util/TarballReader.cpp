@@ -5,6 +5,7 @@
 
 PathReader::PathReader(const asset& path) {
     const std::string tarball_str = std::string(reinterpret_cast<const char*>(path.buf), path.size);
+    std::string debug_str = "";
 
     size_t pos = 0, d_pos = 0, s_pos = 0;
 
@@ -19,7 +20,9 @@ PathReader::PathReader(const asset& path) {
             }
             if (currentLine.starts_with("#PATH-POINTS-START")) {
                 recordingPath = true;
-                paths.push_back(currentLine.substr(19));
+                std::string path_name = currentLine.substr(19);
+                paths.push_back(path_name);
+                debug_str += path_name + " ";
                 s_pos = d_pos + 1;
             } else recordingPath = false;
         }
@@ -34,6 +37,8 @@ PathReader::PathReader(const asset& path) {
         // commit the path
         assets.push_back({path.buf + s_pos, path_content_end - s_pos});
     }
+    
+    pros::lcd::set_text(5, debug_str);
 }
 
 asset& PathReader::operator[](const char* path_name) {
@@ -41,7 +46,7 @@ asset& PathReader::operator[](const char* path_name) {
         if (paths[i] == path_name) { return assets[i]; }
     }
 
-    lemlib::infoSink()->error("Path not found: {}", path_name);
+    pros::lcd::set_text(1, std::string("Path not found: ") + path_name);
     static asset empty = {nullptr, 0};
     return empty;
 }

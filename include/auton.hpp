@@ -28,7 +28,7 @@ inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder,
 // vertical tracking wheel (2.75" omni, offset backward)
 inline lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, 
                                                      lemlib::Omniwheel::NEW_275, 
-                                                     0.64);
+                                                     0.0);
 
 // sensors used for odometry
 inline lemlib::OdomSensors sensors(&vertical_tracking_wheel,      // vertical tracking wheel 1

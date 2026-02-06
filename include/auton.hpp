@@ -1,6 +1,7 @@
 // ========== DRIVETRAIN SETUP ==========
 
 // drivetrain settings
+#include "main.hpp"
 inline lemlib::Drivetrain drivetrain(&leftMG,                          // left motor group
                                      &rightMG,                         // right motor group
                                      12,                               // 12 inch track width
@@ -48,7 +49,7 @@ inline lemlib::ControllerSettings lateral_controller(7,   // proportional gain (
                                                      1,    // small error range (inches)
                                                      100,  // small error range timeout (ms)
                                                      3,    // large error range (inches)
-                                                     500,  // large error range timeout (ms)
+                                                     200,  // large error range timeout (ms)
                                                      20    // maximum acceleration (slew)
 );
 
@@ -88,6 +89,12 @@ class PathReader {
 };
 
 class wingrush {
+    public:
+        const static void left();
+        const static void right();
+};
+
+class ball {
     public:
         const static void left();
         const static void right();

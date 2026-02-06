@@ -34,11 +34,7 @@ const void wingrush::left() {
 }
 
 const void wingrush::right() {
-    chassis.setPose(49.91, 14.828, 0);
-    lift.extend();
-    chassis.moveToPose(44.626, 31.814, 335, 1000);
-    chassis.moveToPose(52.276, 45.93, 85, 1000);
-    chassis.moveToPose(60.38, 46.583, 90, 500);
+    chassis.setPose(47.362, 13.922, 270);
     intake.move(127);
     descore.extend();
     chassis.moveToPoint(30.092  ,17.177 ,5000, {.maxSpeed = 65,.minSpeed = 30, .earlyExitRange = 3});

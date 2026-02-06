@@ -70,16 +70,16 @@ const void wingrush::right() {
     chassis.moveToPoint(50.035, 45.8-4, 5000, {.forwards = true, .maxSpeed = 95}, false);
     chassis.waitUntilDone();
     chassis.turnToHeading(90, 5000);
-    chassis.moveToPoint(61.748+4.7, 45.8-2.5, 4000);
+    chassis.moveToPoint(61.748+4.7, 45.8-2.5, 2000);
     chassis.waitUntilDone();
-    pros::delay(500);
-    chassis.moveToPoint(29.021, 46.661-5.5, 2000, {.forwards = false});
+    pros::delay(5);
+    chassis.moveToPoint(29.021, 46.661-5.5, 1900, {.forwards = false});
     chassis.waitUntilDone();
     outtake.move(127);
     chassis.waitUntilDone();
     descore.retract();
     chassis.setPose(29.021, 47.479, 90);
     pros::delay(2000);
-    chassis.moveToPoint(36.18, 38.843+1, 3000, {.forwards = true});
-    chassis.moveToPose(1, 39.706-3, 90, 9123, {.forwards = false});
+    chassis.moveToPoint(27.793, 38.888, 3000, {.forwards = true});
+    chassis.moveToPose(1, 41.138, 90, 9123, {.forwards = false});
 }

@@ -9,5 +9,5 @@ double getAvgDrivetrainTemp() {
         sum += leftMG.get_temperature();
         sum += rightMG.get_temperature();
     }
-    return sum / 6.0;
+    return sum * 0.3 + 32;
 }

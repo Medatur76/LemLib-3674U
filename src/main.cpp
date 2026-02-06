@@ -1,12 +1,15 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 #include "main.hpp"
+#include "liblvgl/llemu.hpp"
 #endif
 
 int selected_auton = 1;
 std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT"};
 using auton_function = const void(*)(void);
 auton_function autonFuncs[] = {wingrush::left, wingrush::right, midgoal::left, midgoal::right};
+
+void autonomous();
 
 int max(int a, int b) {
 	return a > b ? a : b;
@@ -38,6 +41,9 @@ void initialize() {
 
 	pros::lcd::register_btn0_cb(on_left_button);
 	pros::lcd::register_btn2_cb(on_right_button);
+	pros::lcd::set_text(2, autons[selected_auton]);
+	chassis.getPose();
+	pros::lcd::set_text(3, "X: %.2f, Y: %.2f, T: %.2f,");
 
 	// Calibrate the chassis IMU and sensors
 	chassis.calibrate();
@@ -61,6 +67,8 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {
+	chassis.getPose();
+
 	pros::lcd::set_text(2, autons[selected_auton]);
 }
 

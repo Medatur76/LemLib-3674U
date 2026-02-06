@@ -81,6 +81,10 @@ class PathReader {
         PathReader(const asset&);
 
         asset& operator[](const char*);
+
+        asset& get(const char *);
+
+        bool has(const char *);
 };
 
 class wingrush {

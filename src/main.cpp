@@ -2,6 +2,7 @@
 #define __MAIN_H
 #include "main.hpp"
 #include "liblvgl/llemu.hpp"
+#include "pros/misc.h"
 #endif
 
 int selected_auton = 1;
@@ -10,6 +11,15 @@ using auton_function = const void(*)(void);
 auton_function autonFuncs[] = {wingrush::left, wingrush::right, midgoal::left, midgoal::right, ball::left, ball::right};
 
 void autonomous();
+
+pros::Controller master(pros::E_CONTROLLER_MASTER);
+
+void ControllerAlert () {
+    if (getAvgDrivetrainTemp() > 120) {
+        master.rumble("...");
+    }
+
+}
 
 int max(int a, int b) {
 	return a > b ? a : b;
@@ -101,7 +111,7 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	
 	
 	while (true) {
 		pros::lcd::set_text(3, "Temp: " + std::to_string(getAvgDrivetrainTemp()).substr(0, 5) + "F");
@@ -127,6 +137,7 @@ void opcontrol() {
 			}
 		} else descoreCD = true;
 		
+		// ControllerAlert();
 
 		pros::delay(20);                               // Run for 20 ms then update
 	}

@@ -9,25 +9,27 @@ const void wingrush::left() {
     intake.move(127);
     descore.extend();
     chassis.moveToPoint(30.092  ,-17.177 ,5000, {.maxSpeed = 65,.minSpeed = 30, .earlyExitRange = 3});
-    chassis.moveToPoint(20.749, -21.397, 5000, {.minSpeed = 65, .earlyExitRange = 3});
+    chassis.moveToPoint(20.749, -24.397-3, 5000, {.minSpeed = 65, .earlyExitRange = 3});
+    chassis.waitUntilDone();
     chassis.waitUntilDone();
     lift.retract();
-    chassis.moveToPoint(50.035, -41.8, 5000, {.forwards = true, .maxSpeed = 95}, false);
+    chassis.moveToPoint(50.522, -47, 5000, {.forwards = true, .maxSpeed = 95}, false);
     chassis.waitUntilDone();
     chassis.turnToHeading(90, 5000);
-    chassis.moveToPoint(61.748+4.7, -43.3, 2000);
+    chassis.moveToPoint(64.547, -47-2, 700);
     chassis.waitUntilDone();
-    pros::delay(120);
-    chassis.moveToPoint(29.021, -41.161, 1600, {.forwards = false});
+    pros::delay(5);
+    chassis.moveToPoint(27.129, -47-5, 1600, {.forwards = false});
     chassis.waitUntilDone();
     outtake.move(127);
     chassis.waitUntilDone();
     descore.retract();
-    chassis.setPose(29.021, -47.479, 90);
+    chassis.setPose(31.257, -47.278, 90);
     pros::delay(2000);
-    chassis.moveToPoint(36.18, -39.843, 3000, {.forwards = true});
-    chassis.turnToHeading(95,9000);
-    chassis.moveToPoint(5.907, -41.138, 5000, {.forwards = false});
+    outtake.move(0);
+    chassis.moveToPoint(37.154, -40.595, 3000, {.forwards = true});
+    chassis.turnToHeading(270,9000);
+    chassis.moveToPoint(16.487, -39.219, 5000, {.forwards = true});
 }
 
 const void wingrush::right() {
@@ -51,7 +53,8 @@ const void wingrush::right() {
     descore.retract();
     chassis.setPose(29.021, 47.479, 90);
     pros::delay(2000);
+    outtake.move(0);
     chassis.moveToPoint(36.18, 38.843+1, 3000, {.forwards = true});
     chassis.turnToHeading(95,9000);
-    chassis.moveToPoint(5.907, 41.138, 5000, {.forwards = false});
+    chassis.moveToPoint(16.907, 41.138, 5000, {.forwards = false});
 }

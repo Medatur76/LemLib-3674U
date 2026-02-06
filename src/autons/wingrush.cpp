@@ -5,43 +5,32 @@
 #endif
 
 const void wingrush::left() {
-    // PathReader reader = PathReader(wingrush_left_txt);
-    // chassis.setPose(55.66, -13.306, 270);
-    // lift.retract();
-    // chassis.follow(reader["Start"], 10, 2000);
-    // intake.move(127);
-    // pros::delay(1000);
-    // chassis.follow(reader["Score"], 10, 1000);
-    // outtake.move(127);
-    // pros::delay(1500);
-    // outtake.move(0);
-    // intake.move(0);
-    // descore.retract();
-    // chassis.follow(reader["Descore"], 10, 3000);
-
-    // Temporary copy of left auton for testing
-    chassis.setPose(47.362, -13.922, 90);
+    chassis.setPose(49.91, 14.828, 0);
+    lift.extend();
+    chassis.moveToPose(44.626, 31.814, 335, 1000);
+    chassis.moveToPose(52.276, 45.93, 85, 1000);
+    chassis.moveToPose(60.38, 46.583, 90, 500);
     intake.move(127);
     descore.extend();
-    chassis.moveToPoint(30.092, -17.177, 5000, {.maxSpeed = 65, .minSpeed = 30, .earlyExitRange = 3});
-    chassis.moveToPoint(20.749, -(24.397-3), 5000, {.minSpeed = 65, .earlyExitRange = 3});
+    chassis.moveToPoint(30.092  ,17.177 ,5000, {.maxSpeed = 65,.minSpeed = 30, .earlyExitRange = 3});
+    chassis.moveToPoint(20.749, 24.397-3, 5000, {.minSpeed = 65, .earlyExitRange = 3});
     chassis.waitUntilDone();
     lift.retract();
-    chassis.moveToPoint(50.035, -(45.8-4), 5000, {.forwards = true, .maxSpeed = 95}, false);
+    chassis.moveToPoint(50.035, 45.8-4, 5000, {.forwards = true, .maxSpeed = 95}, false);
     chassis.waitUntilDone();
-    chassis.turnToHeading(270, 5000);
-    chassis.moveToPoint(61.748+4.7, -(45.8-2.5), 4000);
+    chassis.turnToHeading(90, 5000);
+    chassis.moveToPoint(61.748+4.7, 45.8-2.5, 2000);
     chassis.waitUntilDone();
-    pros::delay(500);
-    chassis.moveToPoint(29.021, -(46.661-5.5), 2000, {.forwards = false});
+    pros::delay(5);
+    chassis.moveToPoint(29.021, 46.661-5.5, 1900, {.forwards = false});
     chassis.waitUntilDone();
     outtake.move(127);
     chassis.waitUntilDone();
     descore.retract();
-    chassis.setPose(29.021, -47.479, 270);
+    chassis.setPose(29.021, 47.479, 90);
     pros::delay(2000);
-    chassis.moveToPoint(36.18, -(38.843+1), 3000, {.forwards = true});
-    chassis.moveToPose(1, -(39.706-3), 270, 9123, {.forwards = false});
+    chassis.moveToPoint(27.793, 38.888, 3000, {.forwards = true});
+    chassis.moveToPose(1, 41.138, 90, 9123, {.forwards = false});
 }
 
 const void wingrush::right() {

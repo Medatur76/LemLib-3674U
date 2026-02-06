@@ -74,20 +74,6 @@ inline lemlib::Chassis chassis(drivetrain,       // drivetrain settings
                                sensors             // odometry sensors
 );
 
-class PathReader {
-    protected:
-        std::vector<std::string> paths;
-        std::vector<asset> assets;
-    public:
-        PathReader(const asset&);
-
-        asset& operator[](const char*);
-
-        asset& get(const char *);
-
-        bool has(const char *);
-};
-
 class wingrush {
     public:
         const static void left();

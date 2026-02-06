@@ -96,6 +96,7 @@ void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	
 	while (true) {
+		pros::lcd::set_text(3, "Temp: " + std::to_string(getAvgDrivetrainTemp()).substr(0, 5) + "C");
 		// Arcade control scheme
 		int dir = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
@@ -117,6 +118,7 @@ void opcontrol() {
 				descore.toggle();
 			}
 		} else descoreCD = true;
+		
 
 		pros::delay(20);                               // Run for 20 ms then update
 	}

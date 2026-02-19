@@ -103,27 +103,21 @@ inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue), rightMG(Ri
 
 // Mechanism motors
 inline pros::MotorGroup intake(IntakeMotors);
-inline pros::Motor outtake(OuttakeMotor);
 
 // Pneumatics
-inline pros::adi::Pneumatics descore('N/A', false), matchload({'N/A', 'N/A'}, false), lift({'N/A', 'N/A'}, false), hood('N/A', false), odom_list('N/A', false), middle_descore('N/A', false);
-inline bool liftCD = false, descoreCD = false;
-
-inline pros::Distance left(LEFT_DISTANCE_PORT), right(RIGHT_DISTANCE_PORT), forward(FORWARD_DISTANCE_PORT), backward(BACKWARD_DISTANCE_PORT);
-
-typedef enum {
-    LEFT,
-    RIGHT,
-    FORWARD,
-    BACKWARD
-} dir;
+// This caused the error with the pneumatics not working lasttime as far as im concerned so this might have to be moved back to a cpp file 
+inline pros::adi::Pneumatics matchload('B', false);
+inline bool matchloadCD = false;
+inline pros::adi::Pneumatics lift('A', true);
+inline bool liftCD = false;
+inline pros::adi::Pneumatics hood('D', false);
+inline bool hoodCD = false;
 
 /**
  * Custom headers that rely on declared values above
  */
 
 #include "auton.hpp"
-#include "motions.hpp"
 #include "temp.hpp"
 
 #endif  // _PROS_MAIN_H_

@@ -15,10 +15,10 @@ inline lemlib::Drivetrain drivetrain(&leftMG,                          // left m
 inline pros::Imu imu(9);
 
 // horizontal tracking wheel encoder (rotation sensor on port 15, reversed)
-inline pros::Rotation horizontal_encoder(-15);
+inline pros::Rotation horizontal_encoder(19);
 
 // vertical tracking wheel encoder (rotation sensor on port 5)
-inline pros::Rotation vertical_encoder(5);
+inline pros::Rotation vertical_encoder(16);
 
 // horizontal tracking wheel (2" omni, offset to the left)
 inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, 

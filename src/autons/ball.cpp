@@ -9,7 +9,7 @@ const void ball::left() {
 
 const void ball::right() {
     chassis.setPose(49.271,15.365,0);
-    lift.retract();
+    matchload.retract();
     intake.move(127);
     chassis.moveToPoint(49.271, 46, 3000);
     chassis.turnToHeading(90, 3000);

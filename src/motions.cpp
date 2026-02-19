@@ -20,3 +20,28 @@ void drive_distance(double distance, double timeout, float speed) {
         {distance >= 0, speed}
     );
 }
+
+void driveToWall(double distance, double timeout, float speed = 127, bool from_front = true) {
+    const double exit_range = 1.0;
+    const double start = pros::millis();
+
+    while (pros::millis() - start < timeout) {
+        double front_distance = front.get() / 25.4;
+        double back_distance  = back.get()  / 25.4;
+
+        bool front_valid = front_distance > 10/25.4 && front_distance < 2000/25.4;
+        bool back_valid  = back_distance  > 10/25.4 && back_distance  < 2000/25.4;
+
+        if ((from_front && !front_valid) or (!from_front && !back_valid)) {
+            pros::delay(20);
+            continue;
+        }
+
+        double dist = from_front ? front_distance : back_distance;
+        if (std::abs(dist - distance) <= exit_range) break;
+
+        drive_distance((from_front ? 1 : -1) * (dist - distance), 5000, speed);
+        chassis.waitUntilDone();
+        pros::delay(20);
+    }
+}

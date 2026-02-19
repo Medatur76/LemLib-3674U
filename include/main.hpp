@@ -15,10 +15,10 @@
 #ifndef _PROS_MAIN_H_
 #define _PROS_MAIN_H_
 
-#define LeftMotors {-8, -7, -14}
-#define RightMotors {1, 2, 3}
-#define IntakeMotors {12,-13}
-#define OuttakeMotor 11
+#include "main.hpp"
+#define LeftMotors {-13,-14,-15}
+#define RightMotors {10,20,21} 
+#define IntakeMotors {-11,12}
 
 /**
  * If defined, some commonly used enums will have preprocessor macros which give
@@ -99,21 +99,29 @@ inline pros::MotorGroup rightMG(RightMotors, pros::MotorGearset::blue);
 
 // Mechanism motors
 inline pros::MotorGroup intake(IntakeMotors);
-inline pros::Motor outtake(OuttakeMotor);
 
 // Pneumatics
 // This caused the error with the pneumatics not working lasttime as far as im concerned so this might have to be moved back to a cpp file 
-inline pros::adi::Pneumatics lift('D', true);
-inline bool liftCD = false;
+inline pros::adi::Pneumatics matchload('B', false);
+inline bool matchloadCD = false;
 inline pros::adi::Pneumatics descore('C', false);
 inline bool descoreCD = false;
+inline pros::adi::Pneumatics lift('A', true, true);
+inline bool liftCD = false;
+inline pros::adi::Pneumatics hood('D', false, true);
+inline bool hoodCD = false;
+
+//distance
+inline pros::Distance front(7);
+inline pros::Distance left(18);
+inline pros::Distance right(8);
+inline pros::Distance back(17);
 
 /**
  * Custom headers that rely on declared values above
  */
 
 #include "auton.hpp"
-#include "motions.hpp"
 #include "temp.hpp"
 
 #endif  // _PROS_MAIN_H_

@@ -1,7 +1,6 @@
 // ========== DRIVETRAIN SETUP ==========
 
 // drivetrain settings
-#include "main.hpp"
 inline lemlib::Drivetrain drivetrain(&leftMG,                          // left motor group
                                      &rightMG,                         // right motor group
                                      12,                               // 12 inch track width

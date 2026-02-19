@@ -38,6 +38,7 @@ const void midgoal::right() {
     lift.retract();
     intake.move(127);
     chassis.moveToPoint(49.271, 46, 3000);
+    //ping
     chassis.turnToHeading(90, 3000);
     chassis.moveToPoint(62, 46, 3000);
     chassis.waitUntilDone();

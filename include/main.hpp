@@ -15,10 +15,15 @@
 #ifndef _PROS_MAIN_H_
 #define _PROS_MAIN_H_
 
+#include "pros/distance.hpp"
 #define LeftMotors {-8, -7, -14}
 #define RightMotors {1, 2, 3}
 #define IntakeMotors {12,-13}
 #define OuttakeMotor 11
+#define LEFT_DISTANCE_PORT -1
+#define RIGHT_DISTANCE_PORT -1
+#define FORWARD_DISTANCE_PORT -1
+#define BACKWARD_DISTANCE_PORT -1
 
 /**
  * If defined, some commonly used enums will have preprocessor macros which give
@@ -94,19 +99,24 @@ ASSET(wingrush_right_txt);
 ASSET(wingrush_left_txt);
 
 // Drivetrain motor groups
-inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue);
-inline pros::MotorGroup rightMG(RightMotors, pros::MotorGearset::blue);
+inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue), rightMG(RightMotors, pros::MotorGearset::blue);
 
 // Mechanism motors
 inline pros::MotorGroup intake(IntakeMotors);
 inline pros::Motor outtake(OuttakeMotor);
 
 // Pneumatics
-// This caused the error with the pneumatics not working lasttime as far as im concerned so this might have to be moved back to a cpp file 
-inline pros::adi::Pneumatics lift('D', true);
-inline bool liftCD = false;
-inline pros::adi::Pneumatics descore('C', false);
-inline bool descoreCD = false;
+inline pros::adi::Pneumatics descore('N/A', false), matchload({'N/A', 'N/A'}, false), lift({'N/A', 'N/A'}, false), hood('N/A', false), odom_list('N/A', false), middle_descore('N/A', false);
+inline bool liftCD = false, descoreCD = false;
+
+inline pros::Distance left(LEFT_DISTANCE_PORT), right(RIGHT_DISTANCE_PORT), forward(FORWARD_DISTANCE_PORT), backward(BACKWARD_DISTANCE_PORT);
+
+typedef enum {
+    LEFT,
+    RIGHT,
+    FORWARD,
+    BACKWARD
+} dir;
 
 /**
  * Custom headers that rely on declared values above

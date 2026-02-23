@@ -75,7 +75,7 @@ void opcontrol() {
 		leftMG.move(dir + turn);                      // Sets left motor voltage
 		rightMG.move(dir - turn);                     // Sets right motor voltage
 
-		intake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)-master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) * 127);
+		intake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)-master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) * 127);
 
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
 			if (matchloadCD) {

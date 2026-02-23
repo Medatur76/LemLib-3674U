@@ -48,6 +48,7 @@
 #include "liblvgl/llemu.hpp"
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
+#include "pros/distance.hpp"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -102,10 +103,15 @@ inline pros::MotorGroup intake(IntakeMotors);
 // This caused the error with the pneumatics not working lasttime as far as im concerned so this might have to be moved back to a cpp file 
 inline pros::adi::Pneumatics matchload('B', false, true);
 inline bool matchloadCD = false;
+inline pros::adi::Pneumatics descore('B', false, true);
+inline bool descoreCD = false;
 inline pros::adi::Pneumatics lift('A', true);
 inline bool liftCD = false;
 inline pros::adi::Pneumatics hood('D', false);
 inline bool hoodCD = false;
+
+//distance
+inline pros::Distance front(7), back(17), left(18), right(8);
 
 /**
  * Custom headers that rely on declared values above

@@ -1,7 +1,6 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 #include "main.hpp"
-#include "pros/rtos.hpp"
 #endif
 
 const void ball::left() {

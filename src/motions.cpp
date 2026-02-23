@@ -1,6 +1,8 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 #include "main.hpp"
+#include "pros/distance.hpp"
+#include "pros/rtos.hpp"
 #endif
 
 void move_relative(double x, double y, double timeout, bool forwards, float speed) {

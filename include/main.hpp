@@ -93,8 +93,7 @@ ASSET(wingrush_right_txt);
 ASSET(wingrush_left_txt);
 
 // Drivetrain motor groups
-inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue);
-inline pros::MotorGroup rightMG(RightMotors, pros::MotorGearset::blue);
+inline pros::MotorGroup leftMG(LeftMotors, pros::MotorGearset::blue), rightMG(RightMotors, pros::MotorGearset::blue);
 
 // Mechanism motors
 inline pros::MotorGroup intake(IntakeMotors);
@@ -103,18 +102,10 @@ inline pros::MotorGroup intake(IntakeMotors);
 // This caused the error with the pneumatics not working lasttime as far as im concerned so this might have to be moved back to a cpp file 
 inline pros::adi::Pneumatics matchload('B', false, true);
 inline bool matchloadCD = false;
-inline pros::adi::Pneumatics descore('C', false);
-inline bool descoreCD = false;
-inline pros::adi::Pneumatics lift('A', true, true);
+inline pros::adi::Pneumatics lift('A', true);
 inline bool liftCD = false;
-inline pros::adi::Pneumatics hood('D', false, true);
+inline pros::adi::Pneumatics hood('D', false);
 inline bool hoodCD = false;
-
-//distance
-inline pros::Distance front(7);
-inline pros::Distance left(18);
-inline pros::Distance right(8);
-inline pros::Distance back(17);
 
 /**
  * Custom headers that rely on declared values above

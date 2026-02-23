@@ -5,10 +5,11 @@
 #include "pros/misc.h"
 #endif
 
+
 int selected_auton = 1;
-std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT", "4B LEFT", "4B RIGHT"};
+std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT", "4B LEFT", "4B RIGHT", "OFFSET FINDER", "SKILLS"};
 using auton_function = const void(*)(void);
-auton_function autonFuncs[] = {wingrush::left, wingrush::right, midgoal::left, midgoal::right, ball::left, ball::right};
+auton_function autonFuncs[] = {wingrush::left, wingrush::right, midgoal::left, midgoal::right, ball::left, ball::right, OffsetFinder::run, skills::run};
 
 void autonomous();
 
@@ -46,8 +47,7 @@ void initialize() {
 	pros::lcd::register_btn0_cb(on_left_button);
 	pros::lcd::register_btn2_cb(on_right_button);
 	pros::lcd::set_text(2, autons[selected_auton]);
-	chassis.getPose();
-	pros::lcd::set_text(3, "X: %.2f, Y: %.2f, T: %.2f,");
+	
 
 	chassis.calibrate();
 }
@@ -64,10 +64,11 @@ void autonomous() {
 }
 
 void opcontrol() {
+	int timer = 0;
 	
 	
 	while (true) {
-		pros::lcd::set_text(3, "Temp: " + std::to_string(getAvgDrivetrainTemp()).substr(0, 5) + "F");
+		// pros::lcd::set_text(3, "Temp: " + std::to_string(getAvgDrivetrainTemp()).substr(0, 5) + "F");
 		// Arcade control scheme
 		int dir = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
@@ -90,7 +91,6 @@ void opcontrol() {
 		} else descoreCD = true;
 
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			intake.move(-127);
 			hood.extend();
 		} else {
 			hood.retract();
@@ -103,7 +103,16 @@ void opcontrol() {
 			}
 		} else liftCD = true;
 		
-		// ControllerAlert();
+	// 	if (timer % 5 == 0) { 
+    //    lemlib::Pose pose = chassis.getPose();
+    //     pros::lcd::set_text(3, fmt::format("X: {:.2f}", pose.x));
+    //     pros::lcd::set_text(4, fmt::format("Y: {:.2f}", pose.y));
+    //     pros::lcd::set_text(5, fmt::format("Theta: {:.2f}", pose.theta));
+    // }
+
+    // timer++;
+    // pros::delay(20);
+
 		
 		pros::delay(20);                               // Run for 20 ms then update
 	}

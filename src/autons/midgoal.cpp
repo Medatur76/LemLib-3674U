@@ -30,3 +30,4 @@ const void midgoal::right() {
 
 
 }
+

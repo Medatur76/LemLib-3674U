@@ -15,7 +15,6 @@
 #ifndef _PROS_MAIN_H_
 #define _PROS_MAIN_H_
 
-#include "main.hpp"
 #define LeftMotors {-13,-14,-15}
 #define RightMotors {10,20,21} 
 #define IntakeMotors {-11,12}
@@ -102,7 +101,7 @@ inline pros::MotorGroup intake(IntakeMotors);
 
 // Pneumatics
 // This caused the error with the pneumatics not working lasttime as far as im concerned so this might have to be moved back to a cpp file 
-inline pros::adi::Pneumatics matchload('B', false);
+inline pros::adi::Pneumatics matchload('B', false, true);
 inline bool matchloadCD = false;
 inline pros::adi::Pneumatics descore('C', false);
 inline bool descoreCD = false;

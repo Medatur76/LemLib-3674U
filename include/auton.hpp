@@ -24,12 +24,12 @@ inline pros::Rotation vertical_encoder(16);
 // horizontal tracking wheel (2" omni, offset to the left)
 inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_encoder, 
                                                        lemlib::Omniwheel::NEW_2, 
-                                                       -0.32);
+                                                       0.011);
 
 // vertical tracking wheel (2.75" omni, offset backward)
 inline lemlib::TrackingWheel vertical_tracking_wheel(&vertical_encoder, 
-                                                     lemlib::Omniwheel::NEW_275, 
-                                                     0.0);
+                                                     lemlib::Omniwheel::NEW_2, 
+                                                     0);
 
 // sensors used for odometry
 inline lemlib::OdomSensors sensors(&vertical_tracking_wheel,      // vertical tracking wheel 1
@@ -42,9 +42,9 @@ inline lemlib::OdomSensors sensors(&vertical_tracking_wheel,      // vertical tr
 // ========== PID CONTROLLER SETTINGS ==========
 
 // lateral PID controller
-inline lemlib::ControllerSettings lateral_controller(7,   // proportional gain (kP)
+inline lemlib::ControllerSettings lateral_controller(6,   // proportional gain (kP)
                                                      0,    // integral gain (kI)
-                                                     4,    // derivative gain (kD)
+                                                     1,    // derivative gain (kD)
                                                      3,    // anti windup
                                                      1,    // small error range (inches)
                                                      100,  // small error range timeout (ms)
@@ -54,14 +54,14 @@ inline lemlib::ControllerSettings lateral_controller(7,   // proportional gain (
 );
 
 // angular PID controller
-inline lemlib::ControllerSettings angular_controller(6,    // proportional gain (kP) 6
+inline lemlib::ControllerSettings angular_controller(2.1,    // proportional gain (kP) 6
                                                      0,    // integral gain (kI)
-                                                     34,   // derivative gain (kD) 34
-                                                     3,    // anti windup
+                                                     5,   // derivative gain (kD) 34
+                                                     0,    // anti windup
                                                      1,    // small error range (degrees)
                                                      100,  // small error range timeout (ms)
                                                      3,    // large error range (degrees)
-                                                     500,  // large error range timeout (ms)
+                                                     400,  // large error range timeout (ms)
                                                      0     // maximum acceleration (slew)
 );
 
@@ -90,4 +90,14 @@ class midgoal {
     public:
         const static void left();
         const static void right();
+};
+
+class OffsetFinder {
+    public:
+        const static void run();
+};
+
+class skills {
+    public:
+        const static void run();
 };

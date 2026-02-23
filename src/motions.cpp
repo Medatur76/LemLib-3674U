@@ -12,6 +12,16 @@ void move_relative(double x, double y, double timeout, bool forwards, float spee
     );
 }
 
+void move_relative_to_pose(double x, double y, double theta, double timeout, bool forwards, float speed) {
+    chassis.moveToPose(
+        chassis.getPose().x + x,
+        chassis.getPose().y + y,
+        theta,
+        timeout,
+        {forwards, speed}
+    );
+}
+
 void drive_distance(double distance, double timeout, float speed) {
     chassis.moveToPoint(
         chassis.getPose().x + distance * cos((-chassis.getPose().theta + 90) * M_PI / 180.0),
@@ -33,7 +43,7 @@ void driveToWall(double distance, double timeout, float speed = 127, bool from_f
         bool back_valid  = back_distance  > 10/25.4 && back_distance  < 2000/25.4;
 
         if ((from_front && !front_valid) or (!from_front && !back_valid)) {
-            pros::delay(20);
+            pros::delay(20);  
             continue;
         }
 
@@ -42,6 +52,6 @@ void driveToWall(double distance, double timeout, float speed = 127, bool from_f
 
         drive_distance((from_front ? 1 : -1) * (dist - distance), 5000, speed);
         chassis.waitUntilDone();
-        pros::delay(20);
+        pros::delay(120);
     }
-}
+} 

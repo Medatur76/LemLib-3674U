@@ -32,7 +32,7 @@ void drive_distance(double distance, double timeout, float speed) {
 }
 
 void driveToWall(double distance, double timeout, float speed = 127, bool from_front = true) {
-    const double exit_range = 1.0;
+    const double exit_range = 3.0;
     const double start = pros::millis();
 
     while (pros::millis() - start < timeout) {

@@ -15,7 +15,7 @@
 } else {##piston##CD = true;}
 
 
-int selected_auton = 1;
+int selected_auton = 0;
 std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT", "4B LEFT", "4B RIGHT", "OFFSET FINDER", "SKILLS"};
 using auton_function = const void(*)(void);
 auton_function autonFuncs[] = {wingrush::left, wingrush::right, midgoal::left, midgoal::right, ball::left, ball::right, OffsetFinder::run, skills::run};

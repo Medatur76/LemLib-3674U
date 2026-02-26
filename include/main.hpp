@@ -16,7 +16,7 @@
 #define _PROS_MAIN_H_
 
 #define LeftMotors {-13,-14,-15}
-#define RightMotors {10,20,21} 
+#define RightMotors {6,20,21} 
 #define IntakeMotors {-11,12}
 
 /**

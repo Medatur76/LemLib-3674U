@@ -5,6 +5,15 @@
 #include "pros/misc.h"
 #endif
 
+#define max(x, y) x > y ? x : y
+#define min(x, y) x < y ? x : y
+#define togglePiston(button, piston) if (master.get_digital(pros::E_CONTROLLER_DIGITAL_##button##)) {\
+	if(##piston##CD) {\
+		##piston##CD = false;\
+		piston.toggle();\
+	}\
+} else {##piston##CD = true;}
+
 
 int selected_auton = 1;
 std::string autons[] = {"WINGRUSH LEFT","WINGRUSH RIGHT","MIDGOAL LEFT","MIDGOAL RIGHT", "4B LEFT", "4B RIGHT", "OFFSET FINDER", "SKILLS"};
@@ -20,14 +29,6 @@ void ControllerAlert () {
         master.rumble("...");
     }
 
-}
-
-int max(int a, int b) {
-	return a > b ? a : b;
-}
-
-int min(int a, int b) {
-	return a < b ? a : b;
 }
 
 void on_left_button() {
@@ -77,31 +78,13 @@ void opcontrol() {
 
 		intake.move((master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)-master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) * 127);
 
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-			if (matchloadCD) {
-				matchloadCD = false;
-				matchload.toggle();
-			}
-		} else matchloadCD = true;
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
-			if (descoreCD) {
-				descoreCD = false;
-				descore.toggle();
-			}
-		} else descoreCD = true;
+		togglePiston(DOWN, matchload)
 
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			hood.extend();
-		} else {
-			hood.retract();
-		}
+		togglePiston(B, descore)
 
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-			if (liftCD) {
-				liftCD = false;
-				lift.toggle();
-			}
-		} else liftCD = true;
+		togglePiston(L2, lift)
+		
+		master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) ? hood.extend() : hood.retract();
 		
 	// 	if (timer % 5 == 0) { 
     //    lemlib::Pose pose = chassis.getPose();

@@ -55,3 +55,7 @@ void driveToWall(double distance, double timeout, float speed = 127, bool from_f
         pros::delay(120);
     }
 } 
+
+void turnRelative(double theta, double timeout, float speed) {
+    chassis.turnToHeading(chassis.getPose().theta + theta, timeout, {.maxSpeed = (int)speed});
+}
